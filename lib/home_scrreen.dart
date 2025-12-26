@@ -70,13 +70,25 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             //-- Show notification Urgent button
+            // ReusableElvatedButton(
+            //   text: "Urgent Notfication",
+            //   onPressed: () async {
+            //     debugPrint("Urgent Notfication Started");
+            //     await _notificationService.showNotficationUrgent();
+            //   },
+            // ),
+
+//--exact
             ReusableElvatedButton(
-              text: "Urgent Notfication",
-              onPressed: () async {
-                debugPrint("Urgent Notfication Started");
-                await _notificationService.showNotficationUrgent();
-              },
-            ),
+  text: "Schedule EXACT Notification",
+  onPressed: () async {
+    await _notificationService.scheduleExact8PMNotification();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Exact notification scheduled')),
+    );
+  },
+),
+
 
 
             //-- cancell all notification button
