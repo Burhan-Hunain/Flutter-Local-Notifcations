@@ -11,22 +11,20 @@ class NotificationService {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =  FlutterLocalNotificationsPlugin();
 
   Future<void> initialize() async {
-    // Initialize timezone database
+    //-- Initialize timezone database
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.local);
 
-    // Initialize notification settings
-    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    //-- Initialize notification settings
+    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@mipmap/launcher_icon');
     
-    const DarwinInitializationSettings iosInitializationSettings =
-        DarwinInitializationSettings(
+    const DarwinInitializationSettings iosInitializationSettings = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
     
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
+    const InitializationSettings initializationSettings = InitializationSettings(
       android: androidInitializationSettings,
       iOS: iosInitializationSettings,
     );
@@ -37,13 +35,8 @@ class NotificationService {
     onDidReceiveNotificationResponse: (details) {},
     );
 
-    await _notificationsPlugin
-    .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()
-    ?.requestNotificationsPermission();
-
-
-
+    await _notificationsPlugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>() ?.requestNotificationsPermission();
 
   }
 
@@ -94,18 +87,17 @@ class NotificationService {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
 
-await _notificationsPlugin.zonedSchedule(
-  id,
-  title,
-  body,
-  scheduledDate,
-  platformDetails,
-  androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-  matchDateTimeComponents: DateTimeComponents.time,
-);
+    await _notificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      scheduledDate,
+      platformDetails,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
 
-
-    print('Daily notification scheduled for ${time.hour}:${time.minute}');
+    debugPrint('Daily notification scheduled for ${time.hour}:${time.minute}');
   }
 
   Future<void> cancelNotification(int id) async {
@@ -116,7 +108,7 @@ await _notificationsPlugin.zonedSchedule(
     await _notificationsPlugin.cancelAll();
   }
 
-  // Method to schedule notification for 8 PM
+  //-- Method to schedule notification for Specific Time
   Future<void> schedule8PMNotification() async {
     await scheduleDailyNotification(
       title: 'Daily Reminder',
@@ -126,6 +118,7 @@ await _notificationsPlugin.zonedSchedule(
     );
   }
 
+  //-- Method to show notification in 10 seconds
   Future<void> showTestNotificationIn10Seconds() async {
   const androidDetails = AndroidNotificationDetails(
     'test_channel',
@@ -136,8 +129,7 @@ await _notificationsPlugin.zonedSchedule(
 
   const platformDetails = NotificationDetails(android: androidDetails);
 
-  final scheduledDate =
-      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 10));
+  final scheduledDate =  tz.TZDateTime.now(tz.local).add(const Duration(seconds: 10));
 
   await _notificationsPlugin.zonedSchedule(
     999,
