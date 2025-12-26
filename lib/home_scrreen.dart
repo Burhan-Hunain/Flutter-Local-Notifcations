@@ -69,6 +69,16 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
 
+            //-- Show notification Urgent button
+            ReusableElvatedButton(
+              text: "Urgent Notfication",
+              onPressed: () async {
+                debugPrint("Urgent Notfication Started");
+                await _notificationService.showNotficationUrgent();
+              },
+            ),
+
+
             //-- cancell all notification button
             ReusableElvatedButton(
               text: "Cancel All Notfications",

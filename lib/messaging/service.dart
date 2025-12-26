@@ -142,5 +142,29 @@ class NotificationService {
   );
 }
 
+  //-- Method to show notification with no time || used this in cases like user fill form and send notfication etc
+  Future<void> showNotficationUrgent() async {
+  const androidDetails = AndroidNotificationDetails(
+    'test_channel',
+    'Test Notifications',
+    importance: Importance.max,
+    priority: Priority.high,
+  );
+
+  const platformDetails = NotificationDetails(android: androidDetails);
+
+  final scheduledDate =  tz.TZDateTime.now(tz.local).add(const Duration(milliseconds: 100));
+
+  await _notificationsPlugin.zonedSchedule(
+    999,
+    'Test Notification',
+    'Urgent Notifcation',
+    scheduledDate,
+    platformDetails,
+    androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+
+  );
+}
+
 
 }
