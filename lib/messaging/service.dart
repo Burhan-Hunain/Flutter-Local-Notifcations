@@ -114,7 +114,7 @@ class NotificationService {
     await scheduleDailyNotification(
       title: 'Daily Reminder',
       body: 'This is your daily notification!',
-      time: const TimeOfDay(hour: 19, minute: 43), // 8:00 PM
+      time: const TimeOfDay(hour: 17, minute: 45), // 8:00 PM
       id: 0,
     );
   }
@@ -226,7 +226,7 @@ Future<void> scheduleExact8PMNotification() async {
   await scheduleExactNotification(
     title: 'Exact Reminder',
     body: 'This notification will fire EXACTLY on time',
-    time: const TimeOfDay(hour: 19, minute: 25),
+    time: const TimeOfDay(hour: 16, minute: 28),
     id: 200,
   );
 }

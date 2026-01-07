@@ -70,13 +70,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             //-- Show notification Urgent button
-            // ReusableElvatedButton(
-            //   text: "Urgent Notfication",
-            //   onPressed: () async {
-            //     debugPrint("Urgent Notfication Started");
-            //     await _notificationService.showNotficationUrgent();
-            //   },
-            // ),
+            ReusableElvatedButton(
+              text: "Urgent Notfication",
+              onPressed: () async {
+                debugPrint("Urgent Notfication Started");
+                await _notificationService.showNotficationUrgent();
+              },
+            ),
 
 //--exact
             ReusableElvatedButton(
